@@ -15,7 +15,7 @@ version = 'Version 3.0.2'
 
 mode = 'upload'                     # [ upload | download ]     
 
-# PONER EN ESTA LISTA LOS ARCHVIS QUE SE QUIEREN MANTENER ACTUALIZADOS EN EL SERVIDOR      
+# PONER EN ESTA LISTA LOS ARCHVIS QUE SE QUIEREN MANTENER ACTUALIZADOS EN EL SERVIDOR       
 
 staged_files = [
                     '__CORE__/config.ini',
