@@ -11,7 +11,7 @@ import os
 import sys
 from datetime import datetime
 
-version = 'Version 3.0.2'
+version = 'Version 3.0.3'
 
 mode = 'upload'                     # [ upload | download ]     
 
@@ -30,10 +30,7 @@ staged_files = [
                     '__CORE__/PROCESS/ctrl_library.py',
                     'git.py',
                     'spx_analize.py',
-                    
-                    
-                    
-                    
+                    'error_process_DLGID',
                 ]
 
 
