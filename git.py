@@ -11,7 +11,7 @@ import os
 import sys
 from datetime import datetime
 
-version = 'Version 3.0.4'
+version = 'Version 3.0.5'
 
 mode = 'upload'                     # [ upload | download ]    
 url_remote = 'http://git.spymovil.com/ycabrera/test_dlg.git'
