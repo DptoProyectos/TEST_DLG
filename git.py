@@ -11,9 +11,10 @@ import os
 import sys
 from datetime import datetime
 
-version = 'Version 3.0.3'
+version = 'Version 3.0.4'
 
-mode = 'upload'                     # [ upload | download ]     
+mode = 'upload'                     # [ upload | download ]    
+url_remote = 'http://git.spymovil.com/ycabrera/test_dlg.git'
 
 # PONER EN ESTA LISTA LOS ARCHVIS QUE SE QUIEREN MANTENER ACTUALIZADOS EN EL SERVIDOR       
 
@@ -68,7 +69,7 @@ class GIT:
             os.system(f'git checkout {files}')
         
     def pull(self):
-        os.system('git pull origin')
+        os.system("git pull '{0}'".format(url_remote))
         
     def log(self):  
         os.system('git log --oneline --decorate --graph --all')
