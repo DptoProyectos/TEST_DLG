@@ -1,4 +1,4 @@
-#!/drbd/www/cgi-bin/spx/aut_env/bin/python3.6
+#!/drbd/www/cgi-bin/spx/aut_env/bin/python3.8
 
 """
 
@@ -15,8 +15,10 @@ import datetime
 import os
 
 #LISTA_DLGID = ['FTEST02','FTEST03','FTEST04','FTEST05','NSEN04','NSEN05','NSEN06','NSEN07','NSEN08','NSEN09','NSEN10','NSEN12','NSEN16','NSEN15','NSEN01','NSEN02','NSEN03', 'NSEN14','NSEN17','NSEN18','NSEN19','NSEN20','NSEN21','NSEN22','NSEN23','NSEN24','NSEN25','NSEN26']
-LISTA_DLGID = ['UYTAC032','UYTAC042','UYTAC044','UYTAC045']
-#LISTA_DLGID = ['UYTAC032']
+#LISTA_DLGID = ['UYTAC032','UYTAC042','UYTAC044','UYTAC045']
+LISTA_DLGID = ['PTEST01','PTEST02','PTEST03']
+#LISTA_DLGID = ['UYPT002']
+
 #LISTA_DLGID = ['NSEN01','NSEN02','NSEN03','NSEN04','NSEN05']
 #LISTA_DLGID = ['NSEN06','NSEN07','NSEN08','NSEN09','NSEN10']
 #LISTA_DLGID = ['NSEN12']
@@ -84,6 +86,7 @@ class DATABASE:
         tb_datos = Table('spx_datos', self.metadata, autoload = True, autoload_with=self.engine)
         sel = select([tb_datos.c.fechadata, tb_datos.c.valor, tb_datos.c.ubicacion_id])
         sel = sel.where(tb_datos.c.medida_id == 8)
+        #sel = sel.where(tb_datos.c.medida_id == 67)                #para dataloggers de 8ch
         sel = sel.where(tb_datos.c.fechadata > '{0}'.format(fecha_inicio))
         sel = sel.where(tb_datos.c.fechadata < datetime.datetime.now())
         rp = self.conn.execute(sel)
@@ -199,7 +202,7 @@ class DATABASE:
 
 if __name__ == '__main__':
 
-    opts = {'fecha_inicio':'2020-07-21 00:00', 'lista_dlg':LISTA_DLGID }
+    opts = {'fecha_inicio':'2020-09-02 12:00', 'lista_dlg':LISTA_DLGID }
 
     if len(argv) > 1 and argv[1].startswith('--help'):
         print("""

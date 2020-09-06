@@ -11,7 +11,7 @@ from sqlalchemy import create_engine, MetaData, text, Table
 from datetime import datetime
 import gzip
 
-PATH = '/home/pablo/Spymovil/scripts/python/AnalisisCloroTemperatura/'
+PATH = '/drbd/www/cgi-bin/spx/TEST_DLG'
 FNAME = 'datos_cloroII.csv'
 url = 'mysql+pymysql://pablo:spymovil@192.168.0.8/GDA'
 DLG_LIST = ['NSEN01', 'NSEN02', 'NSEN03', 'NSEN04']
@@ -26,10 +26,15 @@ class CLORO:
         self.wdf = None
         self.dlg_list = []
         sns.set()
+        '''
+        self.DIAS_ATRAS = DIAS_ATRAS
+        self.DLG_LIST = DLG_LIST
+        '''
+        
 
     # ---------------------------------------------------------------------------------------------------
     # DATOS BASE
-    def leer_datos_from_bd(self, dias_atras=DIAS_ATRAS, dlg_list=DLG_LIST, debug=False):
+    def leer_datos_from_bd(self, dias_atras = DIAS_ATRAS, dlg_list=DLG_LIST, debug=False):
         '''
         Lee los datos de los dataloggers en testing desde la base de datos
         Guarda los datos en un archivo CSV
@@ -71,19 +76,20 @@ class CLORO:
         self.df_base.index.name = 'idx'
         # Convierto a archivo y zipeo
         now = datetime.now()
-        csv_file_name = 'datos_cloro_{}.csv'.format(now.strftime('%Y%m%d'))
+        #csv_file_name = 'datos_cloro_{}.csv'.format(now.strftime('%Y%m%d'))
+        csv_file_name = '{}'.format(FNAME)
         self.df_base.to_csv(csv_file_name)
-        # Convierto el archivo a gzip para transportarlo mejor
+        '''# Convierto el archivo a gzip para transportarlo mejor
         f_in = open(csv_file_name, 'rb')
         data = f_in.read()
         bindata = bytearray(data)
         with gzip.open(csv_file_name + '.gz', 'wb') as f_out:
             f_out.write(bindata)
-            f_out.close()
+            f_out.close()'''
         # Luego podemos traernos el archivo csv para comenzar a analizarlo
         return self.df_base
 
-    def leer_datos_from_csv(self, file, path=PATH):
+    def leer_datos_from_csv(self, file = FNAME, path=PATH):
         """
         Leo los datos de un archivo .csv con la informacion bajada de la BD
         de varios dataloggers.
@@ -153,7 +159,7 @@ class CLORO:
         # Luego podemos traernos el archivo csv para comenzar a analizarlo
         return self.df_parametros
 
-    def leer_parametros_from_csv(self, file, path=PATH):
+    def leer_parametros_from_csv(self, file = FNAME, path=PATH):
         """
         Leo los datos de un archivo .csv con la informacion bajada de la BD
         de varios dataloggers.
@@ -222,8 +228,10 @@ class CLORO:
             return None
         #
         qdf = pd.DataFrame()
+        
         for dlgid in self.dlg_list:
-            DATOS_X_HORA = 3600 / int(self.df_parametros.loc[dlgid, 'TPOLL'])
+            #DATOS_X_HORA = 3600 / int(self.df_parametros.loc[dlgid, 'TPOLL'])
+            DATOS_X_HORA = 3600 / int('60')
             DATOS_X_DIA = 24 * DATOS_X_HORA
             # Me quedo con los datos del dlg en cuestion
             df_tmp = self.wdf['valor',dlgid].dropna().copy()
@@ -274,12 +282,14 @@ class CLORO:
         Visualiza en una ventana la misma magnitud para todas las unidades
         '''
         df_boundle=pd.DataFrame()
+        print(df_boundle)
         for (i, dlgid) in enumerate(self.dlg_list):
             data = self.wdf['valor', dlgid].dropna().copy().resample('1Min', axis=0).mean()[magnitud].to_frame(name=dlgid)
             df_boundle = pd.concat([df_boundle, data[dlgid]], axis=1)
         fig, ax = plt.subplots(1, 1, figsize=(10, 10))
         df_boundle.plot(ax=ax)
         plt.tight_layout()
+        #plt.show()
         return
 
     # ---------------------------------------------------------------------------------------------------
@@ -418,12 +428,20 @@ class CLORO:
 
 
 def testing():
+    
     cloro = CLORO()
-    _ = cloro.leer_datos_from_csv(file='datos_cloro_20200826.csv')
-    _ = cloro.leer_parametros_from_csv(file='parametros_cloro_20200826.csv')
+    
+    #cloro.leer_datos_from_bd();
+    #data = cloro.leer_datos_from_csv()
+    #print (data)
+    
+    
+    _ = cloro.leer_datos_from_csv()
+    _ = cloro.leer_parametros_from_csv()
     _ = cloro.preparar_datos_df_base()
-    df_qty = cloro.check_calidad_datos()
-    print(df_qty)
+    #df_qty = cloro.check_calidad_datos()
+    #print(df_qty)
+    cloro.visualizar_x_mag()
 
 
 if __name__ == '__main__':

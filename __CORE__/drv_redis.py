@@ -41,8 +41,8 @@ class Redis(object):
                 value = self.rh.hget(key, param)
                 return value.decode()
             else: return ''
-    
-          
+
+            
     def hexist(self,key, param): 
         if self.connected: return self.rh.hexists(key, param) 
         

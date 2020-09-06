@@ -6,7 +6,7 @@ Created on 16 mar. 2020
 
 @author: Yosniel Cabrera
 
-Version 2.2.0 06-07-2020
+Version 2.2.2 03-08-2020
 ''' 
 
 # LIBRERIAS
@@ -295,7 +295,7 @@ class process_error(object):
                 tdial = int(db.read_dlg_conf(self.DLGID, 'BASE', 'TDIAL'))
                 #
                 # OBTENGO EL TIEMPO DE CAMBIO DE DATO EN MINUTOS  
-                if tdial >= 900:                time2new_data = int(max([tpoll, tdial])/60)
+                if tdial >= 300:                time2new_data = int(max([tpoll, tdial])/60)
                 else:                           time2new_data = int(tpoll/60)
                 #    
                 # GARANTIZO QUE TPOLL MENOR A 60s DEVUELDA 1 MIN
@@ -575,11 +575,11 @@ class TEST_DLG(object):
             redis.del_key(f'{dlgid}_ERROR')
             
             # CAMBIO EL NOMBRE A LA CARPETA DE TEST DEL DLG ELIMINADO
-            try:
-                os.rename(f'{service}/{dlgid}', f'{service}/{dlgid}_stopped')
-            except:
+            #try:
+                #os.rename(f'{service}/{dlgid}', f'{service}/{dlgid}_stopped')   
+            #except:
                 # SI EXISTE UNA CARPETA VIEJA QUE HAYA ESTADO DETENIDA LA ELIMINO PARA RENOMBRAR LA MAS RECIENTE
-                import shutil
-                shutil.rmtree(f'{service}/{dlgid}_stopped')
-                os.rename(f'{service}/{dlgid}', f'{service}/{dlgid}_stopped')
+                #import shutil
+                #shutil.rmtree(f'{service}/{dlgid}_stopped')
+                #os.rename(f'{service}/{dlgid}', f'{service}/{dlgid}_stopped')
             

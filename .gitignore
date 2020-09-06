@@ -1,0 +1,9 @@
+.vscode/launch.json
+.vscode/settings.json
+inits.xlsx
+__CORE__/__pycache__/drv_config.cpython-38.pyc
+__CORE__/__pycache__/mypython.cpython-38.pyc
+datos_cloroII.csv
+datos.xlsx
+.project
+.pydevproject
