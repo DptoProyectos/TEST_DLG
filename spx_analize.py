@@ -202,7 +202,7 @@ class DATABASE:
 
 if __name__ == '__main__':
 
-    opts = {'fecha_inicio':'2020-09-02 12:00', 'lista_dlg':LISTA_DLGID }
+    opts = {'fecha_inicio':'2020-09-03 14:00', 'lista_dlg':LISTA_DLGID }
 
     if len(argv) > 1 and argv[1].startswith('--help'):
         print("""
