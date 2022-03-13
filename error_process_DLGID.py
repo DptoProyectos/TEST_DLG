@@ -25,14 +25,16 @@ LIST_CONFIG = [
                 'print_log',        True,                           # VER LOS LOGS EN CONSOLA [ True | False ]
                 #
                 # ID DE LOS DATALOGGERS QUE SE VAN A UTUILIZAR EN EL SIGUIENTE FORMATO 'DLGID_1:DLGID_2:....DLGID_n'
-                'DLGID',            'YCHTEST',            
+                'DLGID',            'SJPERF021',            
                 #
                 # TIPO DE PROCESO QUE SE ESTA CORRIENDO (TEST PARA ESTE CASO). DEL => PARA DETENER EL TEST.                                               
                 'TYPE',             'TEST',                         # [ TEST | DEL ] 
                 #                                                    
                 'SERVICE',          'TEST_OFICINA',         		# SERVICIO PARA AGRUPAR LOS EASY LOGS [OJO: EL NOMBRE NO PUEDE CONTENER ESPACIOS]
                 # TIEMPO DE POLLEO (en min) AL CUAL ESTA TRABAJANDO EL EQUIPO A TESTEAR
-                'TIMER_POLL',       '1',                            # CON EL VALOR 'AUTO' SE LEE EL TIEMPO MINIMO DE FORMA AUTOMATICA
+                'TIMER_POLL',       '1',                            # AUTO -> SE LEE EL VALOR DE LA CONFIG EN DB | VALUE -> TIEMPO EN MINUTOS
+                # TIEMPO DE ENVIO DE DATOS (en min) AL CUAL ESTA TRABAJANDO EL EQUIPO A TESTEAR
+                'TIMER_DIAL',       '0',                            # AUTO -> SE LEE EL VALOR DE LA CONFIG EN DB | VALUE -> TIEMPO EN MINUTOS
             ]
 
 

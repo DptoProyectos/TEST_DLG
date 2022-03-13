@@ -57,10 +57,27 @@ def error_process(LIST_CONFIG):
     # ESCRIBO NUMERO DE EJECUCION
     redis.no_execution(f'{DLGID}_ERROR')
     
-    # CHEQUEO ERROR TX Y RTC
+    # CHEQUEO ERROR TX
     logs.print_inf(name_function, 'TEST_TX_ERRORS')
-    e.test_tx()
-    
+    if e.test_tx():
+        #
+        # CHEQUEO DE PROBLEMAS EN EL RTC
+        if e.test_RTC_error():
+            logs.print_inf(name_function, 'RTC ERROR')
+            logs.dlg_performance(f'< RTC ERROR >')
+        else:
+            logs.print_inf(name_function, 'RTC OK')
+        #
+        # CHEQUEO DE PROBLEMAS DE RECEPCION MODBUS
+        if e.testModbusRxError():
+            logs.print_inf(name_function, 'MODBUS ERROR')
+            logs.dlg_performance(f'< MODBUS ERROR >')
+        else:
+            logs.print_inf(name_function, 'MODBUS OK')
+
+    else:
+        pass
+
     
     
     
