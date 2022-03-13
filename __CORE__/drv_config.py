@@ -1,4 +1,4 @@
-#!/drbd/www/cgi-bin/spx/aut_env/bin/python3.6
+
 '''
 Created on 14 may. 2020
 
@@ -28,11 +28,14 @@ from parser import st2list
         path_easy_log                ruta en donde van a encontrarse los easy_logs
         TYPE_2_RUN                   valores de la variable TYPE para los cuales el serv_TEST_DLG va a llamar a error process
         
-        !DATABASE
+        SQL DATABASE
         dbuser                       usuario con acceso a la base
         dbpasswd                     password para acceder a la base
         dbhost                       host en donde se encuentra la base
         dbaseName                    nombre de la base de datos
+
+        REDIS DATABASE
+        rddbhost                     ip del host redis
         
         
         
@@ -51,10 +54,8 @@ easy_log = str2bool(serv_APP_config['CONFIG']['easy_log'])
 path_easy_log = serv_APP_config['CONFIG']['path_easy_log']
 TYPE_2_RUN = str2lst(serv_APP_config['CONFIG']['TYPE_2_RUN'])
 dbase2use = serv_APP_config['CONFIG']['dbase2use']
-dbuser = serv_APP_config[dbase2use]['dbuser']
-dbpasswd = serv_APP_config[dbase2use]['dbpasswd']
-dbhost = serv_APP_config[dbase2use]['dbhost']
-dbaseName = serv_APP_config[dbase2use]['dbaseName']
+dbUrl = serv_APP_config[dbase2use]['dbUrl']
+redis_config2use = serv_APP_config['CONFIG']['redis_config2use']
 
-
-
+# REDIS_config2use
+rddbhost = serv_APP_config[redis_config2use]['host']

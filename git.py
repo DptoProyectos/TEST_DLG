@@ -1,4 +1,4 @@
-#!/drbd/www/cgi-bin/spx/aut_env/bin/python3.6
+#!/usr/aut_env/bin/python3.8
 
 '''
 Created on 11 jul. 2020

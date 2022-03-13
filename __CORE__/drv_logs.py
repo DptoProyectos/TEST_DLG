@@ -1,4 +1,4 @@
-#!/drbd/www/cgi-bin/spx/aut_env/bin/python3.6
+
 '''
 DRIVER PARA EL TRABAJO CON LOGS
 

@@ -1,4 +1,4 @@
-#!/drbd/www/cgi-bin/spx/aut_env/bin/python3.6
+
 '''
 DRIVER PARA EL TRABAJO CON LA BASE DE DATOS GDA DE MySQL
 
@@ -9,59 +9,52 @@ Created on 16 mar. 2020
 Version 2.1.1 07-06-2020
 ''' 
 
-# CANEXIONES
-from sqlalchemy import create_engine
-from sqlalchemy import text
+# DEPENDENCIAS
+from sqlalchemy import Table, select, create_engine, MetaData, update, delete
+from sqlalchemy.orm import sessionmaker
 from collections import defaultdict
-from __CORE__.drv_config import dbuser,dbpasswd,dbhost,dbaseName
+from __CORE__.drv_config import dbUrl
 
 
 class GDA(object):
     '''
-        trabajo con base de datos con la estructura GDA
-        parametros necesarios
-        dbuser
-        dbpasswd
-        dbhost
-        dbaseName
+        clase para el trabajo con la base de datos GDA
     '''
 
-    def __init__(self, dbuser = dbuser, dbpasswd = dbpasswd, dbhost = dbhost, dbaseName = dbaseName ):
-        '''
-        Constructor
-        '''
-        self.datasource = ''
-        self.engine = ''
-        self.conn = ''
-        self.connected = False
-        self.url = 'mysql://{0}:{1}@{2}/{3}'.format(dbuser,dbpasswd,dbhost,dbaseName)
-        
+    def __init__(self,dbUrl):
+            '''
+                Constructor
+            '''
+            self.engine = None
+            self.conn = None
+            self.connected = False
+            self.metadata = None
+            self.session = None
+            #self.url = 'mysql+pymysql://pablo:spymovil@192.168.0.8/GDA'
+            #self.url = 'postgresql+psycopg2://admin:pexco599@192.168.0.6/GDA'
+            self.url = dbUrl        
     def connect(self):
         """
-        Retorna True/False si es posible generar una conexion a la bd GDA
+            Retorna True/False si es posible generar una conexion a la bd GDA
         """
-        
-        if self.connected:
-            return self.connected
-        
         try:
             self.engine = create_engine(self.url)
+            Session = sessionmaker(bind=self.engine) 
+            self.session = Session()
         except Exception as err_var:
-            self.connected = False
-            print('ERROR_{0}: engine NOT created. ABORT !!'.format(dbaseName))
-            print('ERROR: EXCEPTION_{0} {1}'.format(dbaseName, err_var))
-            exit(1)
-        
+            print('ERROR: engine NOT created. ABORT !!')
+            print('ERROR: EXCEPTION {0}'.format(err_var))
+            return False
+
         try:
             self.conn = self.engine.connect()
-            self.connected = True
         except Exception as err_var:
-            self.connected = False
-            print('ERROR_{0}: NOT connected. ABORT !!'.format(dbaseName))
-            print('ERROR: EXCEPTION_{0} {1}'.format(dbaseName, err_var))
-            exit(1)
+            print('ERROR: NOT connected. ABORT !!')
+            print('ERROR: EXCEPTION {0}'.format(err_var))
+            return False
 
-        return self.connected
+        self.metadata = MetaData()
+        return True
 
     def read_all_dlg_conf(self, dlgid):
         '''

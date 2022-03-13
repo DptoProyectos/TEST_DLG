@@ -1,4 +1,4 @@
-#!/drbd/www/cgi-bin/spx/aut_env/bin/python3.6
+#!/usr/testDlg_env/bin/python3.8
 '''
 SERVICIO DE DETECCION DE ERRORES EN AUTOMATISMOS
 

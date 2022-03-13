@@ -1,4 +1,4 @@
-#!/drbd/www/cgi-bin/spx/aut_env/bin/python3.6
+#!/usr/testDlg_env/bin/python3.8
 '''
 LLAMADO CON PARAMETROS A APLICACION DE CONTROL DE ERRORES EN TEST_DLG
 
@@ -25,14 +25,14 @@ LIST_CONFIG = [
                 'print_log',        True,                           # VER LOS LOGS EN CONSOLA [ True | False ]
                 #
                 # ID DE LOS DATALOGGERS QUE SE VAN A UTUILIZAR EN EL SIGUIENTE FORMATO 'DLGID_1:DLGID_2:....DLGID_n'
-                'DLGID',            'PTEST01',            
+                'DLGID',            'YCHTEST',            
                 #
                 # TIPO DE PROCESO QUE SE ESTA CORRIENDO (TEST PARA ESTE CASO). DEL => PARA DETENER EL TEST.                                               
-                'TYPE',             'DEL',                         # [ TEST | DEL ] 
+                'TYPE',             'TEST',                         # [ TEST | DEL ] 
                 #                                                    
                 'SERVICE',          'TEST_OFICINA',         		# SERVICIO PARA AGRUPAR LOS EASY LOGS [OJO: EL NOMBRE NO PUEDE CONTENER ESPACIOS]
                 # TIEMPO DE POLLEO (en min) AL CUAL ESTA TRABAJANDO EL EQUIPO A TESTEAR
-                'TIMER_POLL',       'AUTO',                         # CON EL VALOR 'AUTO' SE LEE EL TIEMPO MINIMO DE FORMA AUTOMATICA
+                'TIMER_POLL',       '1',                            # CON EL VALOR 'AUTO' SE LEE EL TIEMPO MINIMO DE FORMA AUTOMATICA
             ]
 
 

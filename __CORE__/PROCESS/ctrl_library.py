@@ -1,4 +1,4 @@
-#!/drbd/www/cgi-bin/spx/aut_env/bin/python3.6
+
 '''
 LIBRERIA DE APLICACION CTRL_FREC
 
@@ -18,7 +18,7 @@ from __CORE__.drv_logs import *
 from __CORE__.drv_redis import Redis
 from __CORE__.mypython import config_var,lst2str,str2lst
 from __CORE__.drv_config import name_log_ctrl_error
-from __CORE__.drv_config import dbuser,dbpasswd,dbhost,dbaseName
+from __CORE__.drv_config import dbUrl
 from __CORE__.drv_db_GDA import GDA
 
 redis = Redis()
@@ -285,7 +285,7 @@ class process_error(object):
         
         name_function = 'TEST_TX_ERRORS'
         
-        db = GDA(dbuser,dbpasswd,dbhost,dbaseName)
+        db = GDA(dbUrl)
 
         # OBTENGO EL TIEMPO DE CAMBIO DE DATOS EN CASO 'AUTO'
         if self.TIMER_POLL == 'AUTO':
