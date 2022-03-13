@@ -8,7 +8,7 @@ Created on 16 mar. 2020
 
 Version 2.1.9 22-06-2020
 ''' 
-
+#
 ## LIBRERIAS
 import os                                                   
 
